@@ -20,14 +20,10 @@ export default function Stack() {
   ]
 
   return (
-    <section id="stack" style={{ padding:'80px 48px' }}>
+    <section id="stack" style={{ padding:'80px 24px' }}>
       <div className="rv">
-        <h2 style={{
-          fontSize:28, fontWeight:700, letterSpacing:'-.02em', marginBottom:6
-        }}>Tech Stack</h2>
-        <p style={{
-          fontFamily:'var(--mono)', fontSize:14, color:'var(--muted)', marginBottom:36
-        }}>
+        <h2 style={{ fontSize:28, fontWeight:700, letterSpacing:'-.02em', marginBottom:6 }}>Tech Stack</h2>
+        <p style={{ fontFamily:'var(--mono)', fontSize:14, color:'var(--muted)', marginBottom:36 }}>
           the tech arsenal behind my builds!
         </p>
       </div>
@@ -39,7 +35,7 @@ export default function Stack() {
             fontFamily:'var(--sans)', fontSize:14, fontWeight:500,
             color:'var(--muted)',
             background:'var(--bg2)', border:'1px solid var(--border2)',
-            padding:'8px 16px', borderRadius:8, cursor:'default',
+            padding:'8px 14px', borderRadius:8, cursor:'default',
             transition:'border-color .2s, color .2s, background .2s'
           }}
           onMouseEnter={e => {

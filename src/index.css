@@ -34,6 +34,12 @@ body {
   font-size: 16px;
 }
 
+/* hide custom cursor on touch devices */
+@media (hover: none) {
+  body { cursor: auto; }
+  #dot, #ring { display: none !important; }
+}
+
 ::selection { background: rgba(232,213,176,.15); }
 ::-webkit-scrollbar { width: 1px; }
 ::-webkit-scrollbar-thumb { background: var(--dim); }
@@ -82,8 +88,15 @@ body:has(a:hover, button:hover) #ring {
   transition: transform 1.5s cubic-bezier(.4,0,.2,1);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* ── RESPONSIVE ─────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 768px) {
   .hide-mobile { display: none !important; }
   .full-mobile { grid-column: 1/-1 !important; max-width: 100% !important; }
+}
+
+/* Mobile: section padding */
+@media (max-width: 640px) {
+  .sec-pad { padding: 60px 20px !important; }
 }

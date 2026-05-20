@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section id="home" style={{
       minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center',
-      padding:'100px 48px 70px', position:'relative', overflow:'hidden'
+      padding:'100px 24px 70px', position:'relative', overflow:'hidden'
     }}>
       <div style={{
         position:'absolute', width:700, height:500, borderRadius:'50%',
@@ -29,39 +29,40 @@ export default function Hero() {
 
       <div style={{ position:'relative', zIndex:1, maxWidth:820, width:'100%' }}>
 
-        {/* ── Profile row ── */}
-        <div className="rv" style={{ display:'flex', alignItems:'center', gap:22, marginBottom:32 }}>
+        {/* Profile row */}
+        <div className="rv" style={{ display:'flex', alignItems:'center', gap:18, marginBottom:28, flexWrap:'wrap' }}>
           <div style={{
-            width:80, height:80, borderRadius:16,
+            width:72, height:72, borderRadius:14,
             border:'1px solid var(--border2)', overflow:'hidden', flexShrink:0
           }}>
-            {/* PUT YOUR PHOTO → public/images/prerna.jpg */}
             <img src="/images/prerna.jpg" alt="Prerna"
               style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center top' }}/>
           </div>
           <div>
             <div style={{
-              fontSize:38, fontWeight:800, letterSpacing:'-.03em', lineHeight:1,
-              marginBottom:6, display:'flex', alignItems:'center', gap:12, flexWrap:'wrap'
+              fontSize:'clamp(28px,6vw,38px)', fontWeight:800, letterSpacing:'-.03em', lineHeight:1,
+              marginBottom:6, display:'flex', alignItems:'center', gap:10, flexWrap:'wrap'
             }}>
               Prerna
               <span style={{
-                fontFamily:'var(--sans)', fontSize:13, color:'var(--live)',
+                fontFamily:'var(--sans)', fontSize:12, color:'var(--live)',
                 background:'rgba(74,222,128,.08)', border:'1px solid rgba(74,222,128,.2)',
-                padding:'4px 12px', borderRadius:20,
+                padding:'4px 10px', borderRadius:20,
                 display:'inline-flex', alignItems:'center', gap:6, fontWeight:500
               }}>
                 <span className="pulse-dot" style={{ width:6, height:6, borderRadius:'50%', background:'var(--live)' }}/>
                 Available for work
               </span>
             </div>
-            <div style={{ fontSize:16, color:'var(--muted)', fontWeight:400 }}>Full-Stack Developer</div>
+            <div style={{ fontSize:15, color:'var(--muted)', fontWeight:400 }}>Full-Stack Developer</div>
           </div>
         </div>
 
-        {/* ── Info grid — Yash style ── */}
+        {/* Info grid */}
         <div className="rv d1" style={{
-          display:'grid', gridTemplateColumns:'1fr 1fr', gap:1,
+          display:'grid',
+          gridTemplateColumns:'repeat(auto-fit, minmax(260px, 1fr))',
+          gap:1,
           background:'var(--border)', border:'1px solid var(--border)',
           borderRadius:12, overflow:'hidden', marginBottom:24
         }}>
@@ -74,25 +75,26 @@ export default function Hero() {
             { ic:'💼',   val:'7 live products shipped solo' },
           ].map(({ ic, val, mono }, i) => (
             <div key={i} style={{
-              background:'var(--bg1)', padding:'14px 20px',
+              background:'var(--bg1)', padding:'12px 18px',
               display:'flex', alignItems:'center', gap:12,
-              fontSize:15, color:'var(--muted)'
+              fontSize:14, color:'var(--muted)'
             }}>
               <span style={{ fontSize:14, minWidth:18, opacity:.5 }}>{ic}</span>
               <span style={{
                 color:'var(--text)',
                 fontFamily: mono ? 'var(--mono)' : 'inherit',
-                fontSize: mono ? 13 : 15,
-                fontWeight: 400
+                fontSize: mono ? 12 : 14,
+                fontWeight: 400,
+                wordBreak:'break-all'
               }}>{val}</span>
             </div>
           ))}
         </div>
 
-        {/* ── Bio ── */}
+        {/* Bio */}
         <p className="rv d2" style={{
-          fontSize:16, color:'var(--muted)', lineHeight:1.85, marginBottom:24, maxWidth:720,
-          fontFamily:'var(--mono)'
+          fontSize:'clamp(13px,2vw,16px)', color:'var(--muted)', lineHeight:1.85,
+          marginBottom:24, maxWidth:720, fontFamily:'var(--mono)'
         }}>
           I build real, deployed products using{' '}
           <TechBadge color="#61dafb">React</TechBadge>,{' '}
@@ -106,16 +108,11 @@ export default function Hero() {
           I thrive on shipping fast — and maintaining what I build.
         </p>
 
-        {/* ── Action buttons ── */}
+        {/* Action buttons */}
         <div className="rv d3" style={{ display:'flex', gap:8, flexWrap:'wrap', alignItems:'center' }}>
-          {/* ✅ RESUME → put resume.pdf in public/resume.pdf */}
-          <a href="/resume.pdf" download="Prerna_Resume.pdf" style={btnPrimary}>
-            📄 Resume
-          </a>
+          <a href="/resume.pdf" download="Prerna_Resume.pdf" style={btnPrimary}>📄 Resume</a>
           <a href="#contact" style={btnGhost}>✉ Contact</a>
-          <a href="https://github.com/codergirlprerna" target="_blank" rel="noreferrer" style={btnGhost}>
-            &lt;/&gt; GitHub
-          </a>
+          <a href="https://github.com/codergirlprerna" target="_blank" rel="noreferrer" style={btnGhost}>&lt;/&gt; GitHub</a>
           <div style={{ width:1, height:38, background:'var(--border2)', margin:'0 4px' }}/>
           <IconBtn href="https://github.com/codergirlprerna" title="GitHub">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -146,7 +143,7 @@ function TechBadge({ color, children }) {
       display:'inline-flex', alignItems:'center', gap:5,
       background:'var(--bg2)', border:'1px solid var(--border2)',
       padding:'3px 10px 3px 6px', borderRadius:5,
-      fontFamily:'var(--mono)', fontSize:13, color:'var(--text)',
+      fontFamily:'var(--mono)', fontSize:12, color:'var(--text)',
       verticalAlign:'middle', margin:'0 2px'
     }}>
       <span style={{ width:8, height:8, borderRadius:2, background:color, display:'inline-block', flexShrink:0 }}/>

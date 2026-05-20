@@ -1,16 +1,9 @@
 import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 
-// ── EmailJS Setup (free) ────────────────────────────────────
-// 1. Go to https://emailjs.com → sign up free
-// 2. Add Service (Gmail) → copy SERVICE_ID
-// 3. Create Template → copy TEMPLATE_ID  
-// 4. Account → API Keys → copy PUBLIC_KEY
-// 5. Replace the 3 values below:
 const SERVICE_ID  = 'service_k43f5dc'
 const TEMPLATE_ID = 'template_pysm34i'
 const PUBLIC_KEY  = 'dO43cSyL35hoBHcY-'
-// ────────────────────────────────────────────────────────────
 
 export default function Contact() {
   const formRef = useRef()
@@ -25,13 +18,18 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" style={{ padding:'80px 48px', background:'var(--bg1)' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:56, alignItems:'start' }}>
+    <section id="contact" style={{ padding:'80px 24px', background:'var(--bg1)' }}>
+      {/* Stack: side-by-side on desktop, stacked on mobile */}
+      <div style={{
+        display:'grid',
+        gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+        gap:48, alignItems:'start'
+      }}>
 
         {/* Left */}
         <div className="rv">
           <h2 style={{
-            fontSize:36, fontWeight:700, letterSpacing:'-.03em',
+            fontSize:'clamp(26px,5vw,36px)', fontWeight:700, letterSpacing:'-.03em',
             marginBottom:14, lineHeight:1.1
           }}>
             Get in <span style={{ color:'var(--accent)' }}>Touch</span>
@@ -41,7 +39,8 @@ export default function Contact() {
             If you ship real software, I want to be part of it.
           </p>
           <a href="mailto:khannaprerna030@gmail.com" style={{
-            fontFamily:'var(--mono)', fontSize:14, color:'var(--accent)', textDecoration:'none'
+            fontFamily:'var(--mono)', fontSize:13, color:'var(--accent)', textDecoration:'none',
+            wordBreak:'break-all'
           }}>
             khannaprerna030@gmail.com
           </a>
@@ -97,7 +96,7 @@ export default function Contact() {
         <div className="rv d2">
           <form ref={formRef} onSubmit={handleSubmit}
             style={{ display:'flex', flexDirection:'column', gap:12 }}>
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(140px, 1fr))', gap:12 }}>
               <input name="user_name"  type="text"  placeholder="Full Name"  required style={inp}/>
               <input name="user_phone" type="tel"   placeholder="Phone No"           style={inp}/>
             </div>

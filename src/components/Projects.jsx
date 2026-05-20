@@ -1,9 +1,3 @@
-// ── HOW TO ADD SCREENSHOTS ──────────────────────────────────
-// 1. Open your live site → F12 → Ctrl+Shift+P → "Capture full size screenshot"
-// 2. Save to:  public/images/cricsense.png  etc.
-// 3. No imports needed — files in /public/ work as /images/name.png
-// ────────────────────────────────────────────────────────────
-
 const PROJECTS = [
   {
     id: 1,
@@ -41,8 +35,8 @@ const PROJECTS = [
     url: 'https://dev-forge-gamma.vercel.app/',
     github: 'https://github.com/codergirlprerna',
     desc: '12 developer tools in one — HTTP API tester, JSON formatter, JWT decoder, regex tester, code diff, password generator, Base64 encoder. No paywalls, no account required.',
+    detail: 'Spring Boot backend powers the API testing tool. Other 11 tools are fully client-side React + Vite — stateless, fast, and private.',
     tags: ['React', 'Tailwind CSS', 'Spring Boot', 'Vite', '12 Tools', 'Client-side'],
-detail: 'Spring Boot backend powers the API testing tool. Other 11 tools are fully client-side React + Vite — stateless, fast, and private.',
     img: '/images/devforge.png',
   },
   {
@@ -80,7 +74,7 @@ const TASKFLOW = {
 
 export default function Projects() {
   return (
-    <section id="work" style={{ padding:'80px 48px', background:'var(--bg1)' }}>
+    <section id="work" style={{ padding:'80px 24px', background:'var(--bg1)' }}>
       <div className="rv">
         <h2 style={{ fontSize:28, fontWeight:700, letterSpacing:'-.02em', marginBottom:6 }}>
           Featured Projects
@@ -90,41 +84,64 @@ export default function Projects() {
         </p>
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
+      {/* Responsive grid: 2 cols on desktop, 1 on mobile */}
+      <div style={{
+        display:'grid',
+        gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 420px), 1fr))',
+        gap:16
+      }}>
         {PROJECTS.map((p, i) => (
           <ProjectCard key={p.id} project={p} delay={i % 4 + 1} />
         ))}
 
-        {/* TaskFlow — full-width featured card */}
-        <a href={TASKFLOW.url} target="_blank" rel="noreferrer"
-          className="rv d1"
-          style={{
-            gridColumn:'1/-1', display:'grid', gridTemplateColumns:'1fr 1fr',
-            background:'var(--bg1)', border:'1px solid var(--border)',
-            borderRadius:14, overflow:'hidden', textDecoration:'none', color:'inherit',
-            transition:'border-color .22s, transform .22s, box-shadow .22s'
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.borderColor='var(--border2)'
-            e.currentTarget.style.transform='translateY(-3px)'
-            e.currentTarget.style.boxShadow='0 20px 56px rgba(0,0,0,.55)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.borderColor='var(--border)'
-            e.currentTarget.style.transform='none'
-            e.currentTarget.style.boxShadow='none'
-          }}
-        >
-          <div style={{ overflow:'hidden', background:'var(--bg2)' }}>
-            <img src={TASKFLOW.img} alt={TASKFLOW.name}
-              style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top left', display:'block' }}/>
-          </div>
-          <CardBody project={TASKFLOW} wide />
-        </a>
+        {/* TaskFlow — full width featured */}
+        <TaskFlowCard project={TASKFLOW} />
       </div>
     </section>
   )
 }
+
+function TaskFlowCard({ project }) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  // inline hook substitute — we read window width
+  if (typeof window !== 'undefined') {
+    // use a simple check (not a hook here, just for SSR safety)
+  }
+
+  return (
+    <a href={project.url} target="_blank" rel="noreferrer"
+      className="rv d1"
+      style={{
+        gridColumn:'1/-1',
+        display:'grid',
+        gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
+        background:'var(--bg1)', border:'1px solid var(--border)',
+        borderRadius:14, overflow:'hidden', textDecoration:'none', color:'inherit',
+        transition:'border-color .22s, transform .22s, box-shadow .22s'
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor='var(--border2)'
+        e.currentTarget.style.transform='translateY(-3px)'
+        e.currentTarget.style.boxShadow='0 20px 56px rgba(0,0,0,.55)'
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor='var(--border)'
+        e.currentTarget.style.transform='none'
+        e.currentTarget.style.boxShadow='none'
+      }}
+    >
+      <div style={{ overflow:'hidden', background:'var(--bg2)', minHeight:200 }}>
+        <img src={project.img} alt={project.name}
+          style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top left', display:'block' }}/>
+      </div>
+      <CardBody project={project} wide />
+    </a>
+  )
+}
+
+// need useState for TaskFlowCard
+import { useState } from 'react'
 
 function ProjectCard({ project, delay }) {
   return (
@@ -162,54 +179,51 @@ function ProjectCard({ project, delay }) {
 function CardBody({ project, wide }) {
   return (
     <div style={{
-      padding: wide ? 30 : 22,
+      padding: wide ? '28px 28px' : '18px 20px',
       display:'flex', flexDirection:'column',
       justifyContent: wide ? 'center' : 'flex-start'
     }}>
       <div style={{
-        fontSize: wide ? 22 : 18, fontWeight:700,
+        fontSize: wide ? 22 : 17, fontWeight:700,
         letterSpacing:'-.02em', marginBottom:8, color:'var(--text)'
       }}>
         {project.name}
       </div>
-      <div style={{ fontSize:14, color:'var(--muted)', lineHeight:1.75, marginBottom:12 }}>
+      <div style={{ fontSize:13, color:'var(--muted)', lineHeight:1.75, marginBottom:12 }}>
         {project.desc}
       </div>
-      {/* Technical detail box */}
       <div style={{
         background:'var(--bg2)', borderRadius:8, padding:'10px 14px',
-        fontSize:13, color:'var(--muted)', lineHeight:1.65, marginBottom:14,
+        fontSize:12, color:'var(--muted)', lineHeight:1.65, marginBottom:14,
         borderLeft:'2px solid var(--border2)'
       }}>
         {project.detail}
       </div>
-      {/* Tags */}
       <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginBottom:16 }}>
         {project.tags.map(t => (
           <span key={t} style={{
-            fontFamily:'var(--sans)', fontSize:12, fontWeight:500,
+            fontFamily:'var(--sans)', fontSize:11, fontWeight:500,
             color:'var(--muted)', background:'var(--bg)',
             border:'1px solid var(--border2)',
             padding:'4px 10px', borderRadius:6
           }}>{t}</span>
         ))}
       </div>
-      {/* Links */}
       <div style={{ display:'flex', gap:8 }}>
         <span style={{
           display:'inline-flex', alignItems:'center', gap:6,
-          fontFamily:'var(--sans)', fontSize:13, fontWeight:500,
+          fontFamily:'var(--sans)', fontSize:12, fontWeight:500,
           color:'var(--live)', border:'1px solid rgba(74,222,128,.22)',
-          padding:'6px 14px', borderRadius:6, background:'rgba(74,222,128,.05)'
+          padding:'6px 12px', borderRadius:6, background:'rgba(74,222,128,.05)'
         }}>
           <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--live)', animation:'pulse 2s infinite' }}/>
           Live
         </span>
         <span style={{
           display:'inline-flex', alignItems:'center', gap:6,
-          fontFamily:'var(--sans)', fontSize:13, fontWeight:500,
+          fontFamily:'var(--sans)', fontSize:12, fontWeight:500,
           color:'var(--muted)', border:'1px solid var(--border2)',
-          padding:'6px 14px', borderRadius:6, background:'var(--bg)'
+          padding:'6px 12px', borderRadius:6, background:'var(--bg)'
         }}>
           GitHub →
         </span>

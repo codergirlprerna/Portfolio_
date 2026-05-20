@@ -41,7 +41,7 @@ export default function About() {
   }, [])
 
   return (
-    <section id="about" style={{ padding:'80px 48px' }}>
+    <section id="about" style={{ padding:'80px 24px' }}>
       <div className="rv">
         <h2 style={{ fontSize:28, fontWeight:700, letterSpacing:'-.02em', marginBottom:6 }}>About Me</h2>
         <p style={{ fontFamily:'var(--mono)', fontSize:14, color:'var(--muted)', marginBottom:36 }}>
@@ -49,19 +49,24 @@ export default function About() {
         </p>
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 340px', gap:72, alignItems:'start' }}>
+      {/* Stack: side-by-side on desktop, stacked on mobile */}
+      <div style={{
+        display:'grid',
+        gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+        gap:48, alignItems:'start'
+      }}>
 
         {/* Left */}
         <div className="rv d1">
           <div style={{
-            fontSize:'clamp(22px,2.5vw,30px)', fontWeight:700,
+            fontSize:'clamp(18px,2.5vw,28px)', fontWeight:700,
             letterSpacing:'-.025em', lineHeight:1.4, marginBottom:20
           }}>
             "Companies say freshers have no experience.<br/>
             <span style={{ color:'var(--accent)' }}>My 7 live products say otherwise."</span>
           </div>
 
-          <div style={{ fontSize:15, color:'var(--muted)', lineHeight:1.9 }}>
+          <div style={{ fontSize:14, color:'var(--muted)', lineHeight:1.9 }}>
             <p>I'm a full-stack developer who builds <strong style={{color:'var(--text)',fontWeight:600}}>real, deployed products</strong> — not homework assignments or tutorial clones. Every project is live right now, built entirely solo.</p>
             <p style={{marginTop:14}}>My stack runs from <strong style={{color:'var(--text)',fontWeight:600}}>React UIs</strong> through <strong style={{color:'var(--text)',fontWeight:600}}>Spring Boot microservices</strong>, backed by <strong style={{color:'var(--text)',fontWeight:600}}>MySQL + Firebase + Firestore</strong>, and wired with real-time WebSockets and AI integrations from Claude, Gemini, and Groq.</p>
             <p style={{marginTop:14}}>I don't stop at "it works locally." I ship, iterate, and maintain. Looking for a team that values what you've <strong style={{color:'var(--text)',fontWeight:600}}>actually built</strong>.</p>
@@ -71,7 +76,7 @@ export default function About() {
           <div ref={barsRef} style={{ marginTop:28, display:'flex', flexDirection:'column', gap:14 }}>
             {SKILLS.map(s => (
               <div key={s.label} style={{ display:'flex', alignItems:'center', gap:14 }}>
-                <span style={{ fontFamily:'var(--mono)', fontSize:12, color:'var(--muted)', minWidth:120 }}>
+                <span style={{ fontFamily:'var(--mono)', fontSize:12, color:'var(--muted)', minWidth:110 }}>
                   {s.label}
                 </span>
                 <div style={{ flex:1, height:1, background:'var(--bg3)', borderRadius:1, overflow:'hidden' }}>
@@ -93,17 +98,17 @@ export default function About() {
           }}>
             {INFO.map(row => (
               <div key={row.label}
-                style={{ background:'var(--bg1)', padding:'14px 20px', transition:'background .15s' }}
+                style={{ background:'var(--bg1)', padding:'12px 18px', transition:'background .15s' }}
                 onMouseEnter={e => e.currentTarget.style.background='var(--bg2)'}
                 onMouseLeave={e => e.currentTarget.style.background='var(--bg1)'}
               >
                 <div style={{
                   fontFamily:'var(--mono)', fontSize:10, color:'var(--dim)',
-                  letterSpacing:'.12em', textTransform:'uppercase', marginBottom:5
+                  letterSpacing:'.12em', textTransform:'uppercase', marginBottom:4
                 }}>
                   {row.label}
                 </div>
-                <div style={{ fontSize:14, fontWeight:500, color:'var(--text)' }}>
+                <div style={{ fontSize:13, fontWeight:500, color:'var(--text)', wordBreak:'break-word' }}>
                   {row.href ? (
                     <a href={row.href}
                       target={row.download ? undefined : '_blank'}
